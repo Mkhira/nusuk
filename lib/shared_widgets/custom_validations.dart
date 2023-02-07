@@ -26,7 +26,7 @@ class IsPassword extends TextValidationRule {
   String get defaultError => 'passwordValidation';
 
   @override
-  bool isValid(String? val) => true;
+  bool isValid(String? val) => val!.length>=6?true:false;
 }
 
 class IsPassword2 extends TextValidationRule {

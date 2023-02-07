@@ -56,6 +56,7 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(height: .03.sh),
                   CustomTextInput(
                     cornerRadius:5,
+
                     textEditController: _nameController,
                     inputType: InputType.Email,
                     showPrefix: false,
@@ -67,8 +68,10 @@ class _LoginPageState extends State<LoginPage> {
                     showSuffix: false,
                     paddingH: context.width * .01,
                     topLabel: 'Email',
+                    bgWhite: true,
+                    showRequired: false,
+
                     // hintTextString: 'username'
-                    labelText: 'Email',
 
                     textInputAction: TextInputAction.next,
                   ),
@@ -81,6 +84,7 @@ class _LoginPageState extends State<LoginPage> {
                     textEditController: _passwordController,
                     inputType: InputType.Password,
                     showPrefix: false,
+
                     prefixIcon: Icon(
                       Icons.lock,
                       size: 20,
@@ -94,7 +98,9 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     isVisible: passVisible,
                     paddingH: context.width * .01,
-                    labelText: 'Password',
+                    topLabel: 'Password',
+                    bgWhite: true,
+                    showRequired: false,
                     // hintTextString: 'password',
                     textInputAction: TextInputAction.done,
                   ),
@@ -142,13 +148,13 @@ class _LoginPageState extends State<LoginPage> {
                   RichText(
                     text: TextSpan(
                       text: 'Dont\'t have account?',
-                      style: context.textTheme.headline4!.copyWith(
+                      style: context.textTheme.headline5!.copyWith(
                         color: context.theme.primaryColor,
                         fontSize: 10.sp,
                       ),
                       children: <TextSpan>[
                         TextSpan(
-                          text: ' registerNew',
+                          text: ' Create account',
                           style: context.textTheme.headline4!.copyWith(
                             color: context.theme.primaryColor,
                             fontSize: 10.sp,
@@ -172,6 +178,7 @@ class _LoginPageState extends State<LoginPage> {
 
 
   Future<void> doLogin() async {
-    context.navigator(CheckEmail());
+    _formKey.currentState!.validate() ?context.navigator(CheckEmail()):null;
+
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hijri/hijri_calendar.dart';
 import 'package:hijri_picker/hijri_picker.dart';
 import 'package:nusuk/config/color_scheme_exrension.dart';
@@ -107,18 +108,31 @@ class CustomTextInput extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              if (topLabel.isNotEmpty)
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
-                  child: Text(
-                    '$topLabel ${showRequired ? '*' : ''}',
+
+              if (topLabel.isNotEmpty)  Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: RichText(
+                  text: TextSpan(
+                    text: topLabel??'',
                     style: context.textTheme.headline5!.copyWith(
                       color: bgWhite
-                          ? context.theme.colorScheme.textColor
+                          ? context.theme.colorScheme.kTextColor
                           : context.theme.colorScheme.light,
+                      fontSize: 12.sp,
                     ),
+                    children: <TextSpan>[
+                      if(showRequired)...[TextSpan(
+                          text: ' *',
+                          style: context.textTheme.headline5!.copyWith(
+                              color: context.theme.colorScheme.error,
+                            fontSize: 12.sp,
+                          ),
+
+                      ),]
+                    ],
                   ),
                 ),
+              ),
               TextFormField(
                 textDirection: textDirection,
                 readOnly: <InputType>[InputType.Choices, InputType.Date]

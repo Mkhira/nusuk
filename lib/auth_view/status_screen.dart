@@ -72,7 +72,7 @@ class _StatusScreenState extends State<StatusScreen> {
                   ),
                   children: <TextSpan>[
                     TextSpan(
-                        text: ' registerNew',
+                        text: ' Create account',
                         style: context.textTheme.headline4!.copyWith(
                             color: context.theme.primaryColor,
                             fontSize: 10.sp,

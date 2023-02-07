@@ -75,7 +75,8 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                     paddingH: context.width * .01,
                     topLabel: 'Email',
                     // hintTextString: 'username'
-                    labelText: 'Email',
+                    bgWhite: true,
+                    showRequired: false,
 
                     textInputAction: TextInputAction.next,
                   ),
@@ -106,7 +107,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                       ),
                       children: <TextSpan>[
                         TextSpan(
-                            text: ' registerNew',
+                            text: ' Create account',
                             style: context.textTheme.headline4!.copyWith(
                                 color: context.theme.primaryColor,
                                 fontSize: 10.sp,
