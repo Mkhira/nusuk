@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nusuk/auth_view/check_email.dart';
 import 'package:nusuk/auth_view/forgetPassword.dart';
+import 'package:nusuk/auth_view/sign_up.dart';
 import 'package:nusuk/config/color_scheme_exrension.dart';
 import 'package:nusuk/shared_widgets/custom_button.dart';
 import 'package:nusuk/utlis/context_extensions.dart';
@@ -161,7 +162,9 @@ class _LoginPageState extends State<LoginPage> {
                               decoration: TextDecoration.underline
                           ),
                           recognizer: TapGestureRecognizer()
-                            ..onTap=(){}
+                            ..onTap=(){
+                            context.navigator(SignUp());
+                            }
                         ),
                       ],
                     ),

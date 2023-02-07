@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hijri/hijri_calendar.dart';
 import 'package:hijri_picker/hijri_picker.dart';
@@ -178,20 +179,21 @@ class CustomTextInput extends StatelessWidget {
                 maxLines: maxLines,
                 onEditingComplete: onEditingComplete,
               ),
+              if (bottomHint.isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Text(
+                    bottomHint,
+                    style: context.textTheme.bodySmall!.copyWith(
+                        fontWeight: FontWeight.normal,
+                        color: borderColor,
+                        fontSize: 10.sp
+                    ),
+                  ),
+                ),
             ],
           ),
-          if (bottomHint.isNotEmpty)
-            PositionedDirectional(
-              end: 20,
-              bottom: 3,
-              child: Text(
-                bottomHint,
-                style: context.textTheme.headline4!.copyWith(
-                  fontWeight: FontWeight.normal,
-                  color: borderColor,
-                ),
-              ),
-            ),
+
         ],
       ),
     );
@@ -401,21 +403,31 @@ class CustomTextInput extends StatelessWidget {
   Future<void> _selectDate(BuildContext context) async {
     final HijriCalendar nowHijri = HijriCalendar.now();
 
-    final HijriCalendar? picked = await showHijriDatePicker(
-      context: context,
-      initialDate: nowHijri,
-      lastDate: HijriCalendar.now(),
-      firstDate: HijriCalendar()
-        ..hYear = nowHijri.hYear - 20
-        ..hMonth = nowHijri.hMonth
-        ..hDay = nowHijri.hDay,
-    );
 
-    if (picked != null) {
-      textEditController.text = AppUtils().replaceArFaNumbersToEn(
-        picked.toFormat('dd/mm/yyyy'),
-      );
-    }
+
+
+    DatePicker.showDatePicker(context,
+        showTitleActions: true,
+        minTime: DateTime(1770, 3, 5),
+        maxTime: DateTime.now(), onChanged: (date) {
+        }, onConfirm: (date) {
+          textEditController.text = '${date.day}/${date.month}/${date.year}';
+        }, currentTime: DateTime.now(), locale: LocaleType.en);
+    // final HijriCalendar? picked = await showHijriDatePicker(
+    //   context: context,
+    //   initialDate: nowHijri,
+    //   lastDate: HijriCalendar.now(),
+    //   firstDate: HijriCalendar()
+    //     ..hYear = nowHijri.hYear - 20
+    //     ..hMonth = nowHijri.hMonth
+    //     ..hDay = nowHijri.hDay,
+    // );
+    //
+    // if (picked != null) {
+    //   textEditController.text = AppUtils().replaceArFaNumbersToEn(
+    //     picked.toFormat('dd/mm/yyyy'),
+    //   );
+    // }
   }
 }
 
