@@ -15,6 +15,7 @@ import 'package:nusuk/utlis/context_extensions.dart';
 
 import '../shared_widgets/custom_button.dart';
 import '../shared_widgets/custom_text_input.dart';
+import 'complite_profile.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -472,6 +473,7 @@ class _SignUpState extends State<SignUp> {
   }
 
   Future<void> signUp()async{
-  _formKey.currentState!.validate();
+  // _formKey.currentState!.validate();
+    context.navigator(CompleteProfile());
   }
 }

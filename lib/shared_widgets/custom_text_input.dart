@@ -4,7 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hijri/hijri_calendar.dart';
-import 'package:hijri_picker/hijri_picker.dart';
+import 'package:dartx/dartx.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:nusuk/config/color_scheme_exrension.dart';
 import 'package:nusuk/utlis/context_extensions.dart';
 import 'package:queen_validators/queen_validators.dart';
@@ -136,13 +137,13 @@ class CustomTextInput extends StatelessWidget {
               ),
               TextFormField(
                 textDirection: textDirection,
-                readOnly: <InputType>[InputType.Choices, InputType.Date]
+                readOnly: <InputType>[InputType.Choices, InputType.Date,InputType.upload]
                     .contains(inputType),
                 onTap: inputType == InputType.Choices
                     ? () => _showChoices(context)
                     : inputType == InputType.Date
                         ? () => _selectDate(context)
-                        : null,
+                        :inputType == InputType.upload?_uploadImage: null,
                 controller: textEditController,
                 validator: qValidator(
                   getValidations,
@@ -429,6 +430,17 @@ class CustomTextInput extends StatelessWidget {
     //   );
     // }
   }
+
+
+  Future<void> _uploadImage()async{
+    final ImagePicker _picker = ImagePicker();
+    // Pick an image
+    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    if(image != null ){
+      textEditController.text = image.name;
+    }
+
+  }
 }
 
 // _isValidate = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$').hasMatch(textFieldValue);
@@ -445,4 +457,5 @@ enum InputType {
   Choices,
   Phone,
   Date,
+  upload,
 }
