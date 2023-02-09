@@ -20,18 +20,21 @@ import 'package:nusuk/config/color_scheme_exrension.dart';
 import 'package:nusuk/shared_widgets/custom_button.dart';
 import 'package:nusuk/utlis/context_extensions.dart';
 
+import '../config/enums.dart';
 import '../shared_widgets/app_text_view.dart';
 import '../shared_widgets/custom_text_input.dart';
 import '../shared_widgets/logo_widget.dart';
 
-class ForgetPassword extends StatefulWidget {
-  const ForgetPassword({Key? key}) : super(key: key);
-
+class SendEmail extends StatefulWidget {
+  const SendEmail({Key? key,required this.type,required this.title,required this.description}) : super(key: key);
+  final String title;
+  final String description;
+  final SendEmailTypes type;
   @override
-  State<ForgetPassword> createState() => _ForgetPasswordState();
+  State<SendEmail> createState() => _SendEmailState();
 }
 
-class _ForgetPasswordState extends State<ForgetPassword> {
+class _SendEmailState extends State<SendEmail> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   final TextEditingController _nameController = TextEditingController();
@@ -56,10 +59,10 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                 children: <Widget>[
                   LogoWidget(),
                   SizedBox(height: .03.sh),
-                  AppTextView(text: 'Forget your password ',size: 20.sp),
+                  AppTextView(text: '${widget.title} ',size: 20.sp),
                   SizedBox(height: .01.sh),
 
-                  AppTextView(text: 'Enter your email to reset your password',size: 10.sp),
+                  AppTextView(text: widget.description,size: 10.sp),
                   SizedBox(height: .03.sh),
                   CustomTextInput(
                     cornerRadius:5,

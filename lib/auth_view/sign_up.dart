@@ -9,6 +9,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nusuk/auth_view/login.dart';
+import 'package:nusuk/auth_view/using_policy.dart';
 import 'package:nusuk/config/color_scheme_exrension.dart';
 import 'package:nusuk/shared_widgets/app_text_view.dart';
 import 'package:nusuk/utlis/context_extensions.dart';
@@ -388,6 +389,7 @@ class _SignUpState extends State<SignUp> {
                                       fontSize: 10.sp,
                                       decoration: TextDecoration.underline
                                   ),
+                                // recognizer: TapGestureRecognizer()..onTap= ()=> context.navigator(UsingPolicy())
 
                               ),
                             ],
@@ -474,6 +476,6 @@ class _SignUpState extends State<SignUp> {
 
   Future<void> signUp()async{
   // _formKey.currentState!.validate();
-    context.navigator(CompleteProfile());
+    context.navigator(UsingPolicy());
   }
 }

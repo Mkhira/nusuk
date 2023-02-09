@@ -9,6 +9,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nusuk/auth_view/reset_password.dart';
+import 'package:nusuk/auth_view/sign_up.dart';
 import 'package:nusuk/config/constants.dart';
 import 'package:nusuk/shared_widgets/app_text_view.dart';
 import 'package:nusuk/shared_widgets/custom_button.dart';
@@ -79,7 +80,9 @@ class _StatusScreenState extends State<StatusScreen> {
                             decoration: TextDecoration.underline
                         ),
                         recognizer: TapGestureRecognizer()
-                          ..onTap=(){}
+                          ..onTap=(){
+                          context.navigator(SignUp());
+                          }
                     ),
                   ],
                 ),

@@ -8,9 +8,10 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nusuk/auth_view/check_email.dart';
-import 'package:nusuk/auth_view/forgetPassword.dart';
+import 'package:nusuk/auth_view/send_email.dart';
 import 'package:nusuk/auth_view/sign_up.dart';
 import 'package:nusuk/config/color_scheme_exrension.dart';
+import 'package:nusuk/config/enums.dart';
 import 'package:nusuk/shared_widgets/custom_button.dart';
 import 'package:nusuk/utlis/context_extensions.dart';
 
@@ -48,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  LogoWidget(),
+                  const LogoWidget(),
                   SizedBox(height: .03.sh),
                   AppTextView(text: 'Welcome Back',size: 20.sp),
                   SizedBox(height: .01.sh),
@@ -115,7 +116,7 @@ class _LoginPageState extends State<LoginPage> {
                         child: TextButton(
                           onPressed: () {
                             // Modular.to.pushNamed(AppRoutes.userForgotPassword);
-                            context.navigator(ForgetPassword());
+                            context.navigator(const SendEmail(title: 'Forget your password',type: SendEmailTypes.forgetPassword,description: 'Enter your email to reset your password',));
                           },
                           child: Text(
                             'Forget Password?',
@@ -163,7 +164,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           recognizer: TapGestureRecognizer()
                             ..onTap=(){
-                            context.navigator(SignUp());
+                            context.navigator(const SignUp());
                             }
                         ),
                       ],
@@ -181,7 +182,7 @@ class _LoginPageState extends State<LoginPage> {
 
 
   Future<void> doLogin() async {
-    _formKey.currentState!.validate() ?context.navigator(CheckEmail()):null;
+    _formKey.currentState!.validate() ?context.navigator(const CheckEmail()):null;
 
   }
 }
