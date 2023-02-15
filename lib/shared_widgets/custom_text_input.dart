@@ -245,6 +245,7 @@ class CustomTextInput extends StatelessWidget {
   }
 
   List<TextValidationRule> get getValidations {
+
     final List<TextValidationRule> validations = <TextValidationRule>[
       if (inputType != InputType.Optional) IsRequired('requiredField'),
     ];
@@ -258,6 +259,8 @@ class CustomTextInput extends StatelessWidget {
       validations.add(IsPhone('phoneValidation'));
     } else if (inputType == InputType.Number) {
       validations.add(IsNumberClass('numberValidation'));
+    } else if (inputType == InputType.arabic) {
+      validations.add(IsArabic('not arabic'));
     } else if (inputType == InputType.Date) {
     } else if (inputType == InputType.Choices) {
     } else if (inputType == InputType.PaymentCard) {
@@ -458,4 +461,21 @@ enum InputType {
   Phone,
   Date,
   upload,
+  arabic,
+}
+class IsArabic extends TextValidationRule {
+  IsArabic([String? error]) : super(error);
+
+  @override
+  bool isValid(String input) => isArabicNum(input);
+  @override
+  String toString() => 'not Arabic';
+}
+
+bool isArabicNum(String input) {
+  //ToDo if it's starts with 0 , i.e 032158 it's not a valid number
+
+
+  print(RegExp(r'^[\u0600-\u06FF\s]+$').hasMatch(input));
+  return RegExp(r'^[\u0600-\u06FF\s]+$').hasMatch(input);
 }

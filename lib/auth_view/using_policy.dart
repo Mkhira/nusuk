@@ -35,7 +35,7 @@ class UsingPolicy extends StatelessWidget {
                     padding: const EdgeInsets.all(2.0),
                     child: IconButton(icon: const Icon(Icons.arrow_back_ios_outlined,color: Colors.white,)
                       ,onPressed: (){
-                        Navigator.canPop(context);
+                        Navigator.pop(context);
                       },),
                   ),
                   const Spacer(),

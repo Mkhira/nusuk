@@ -1,10 +1,3 @@
-
-
-
-
-
-
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,6 +9,7 @@ import 'package:nusuk/utlis/context_extensions.dart';
 
 import '../shared_widgets/custom_button.dart';
 import '../shared_widgets/custom_text_input.dart';
+import '../shared_widgets/drop_down_button.dart';
 import 'complite_profile.dart';
 
 class SignUp extends StatefulWidget {
@@ -36,48 +30,75 @@ class _SignUpState extends State<SignUp> {
   final TextEditingController _thirdNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _nameArabicController = TextEditingController();
-  final TextEditingController _secondNameArabicController = TextEditingController();
-  final TextEditingController _thirdNameArabicController = TextEditingController();
-  final TextEditingController _lastNameArabicController = TextEditingController();
+  final TextEditingController _secondNameArabicController =
+      TextEditingController();
+  final TextEditingController _thirdNameArabicController =
+      TextEditingController();
+  final TextEditingController _lastNameArabicController =
+      TextEditingController();
 
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
   bool passVisible = false;
   bool passConfirmVisible = false;
   bool subscribe = false;
   bool terms = false;
   bool knowledge = false;
+
+  String dropdownvalue = 'Item 1';
+
+  // List of items in our dropdown menu
+  var items = [
+    'Item 1',
+    'Item 2',
+    'Item 3',
+    'Item 4',
+    'Item 5',
+  ];
   @override
   Widget build(BuildContext context) {
-    return SafeArea(child: Scaffold(
+    return SafeArea(
+        child: Scaffold(
       appBar: AppBar(
         backgroundColor: context.theme.primaryColor,
         elevation: 0,
         leading: const SizedBox(),
         iconTheme: const IconThemeData(color: Colors.white),
-        bottom: PreferredSize(preferredSize: Size.fromHeight(.06.sh), child: SizedBox(
-               height: .08.sh,
-          child: Column(
-            children: [
-              Row(
-                children:  [
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(.06.sh),
+          child: SizedBox(
+            height: .08.sh,
+            child: Column(
+              children: [
+                Row(
+                  children: [
                     Padding(
-                     padding: const EdgeInsets.all(2.0),
-                     child: IconButton(icon: const Icon(Icons.arrow_back_ios_outlined,color: Colors.white,)
-                       ,onPressed: (){
-                       Navigator.canPop(context);
-                       },),
-                   ),
-                  const Spacer(),
-                  AppTextView(text: 'Create Account', size: 20.sp,color: Colors.white,),
-                  const Spacer(),
-
-                ],
-              ),
-              const Spacer(),
-            ],
+                      padding: const EdgeInsets.all(2.0),
+                      child: IconButton(
+                        icon: const Icon(
+                          Icons.arrow_back_ios_outlined,
+                          color: Colors.white,
+                        ),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ),
+                    const Spacer(),
+                    AppTextView(
+                      text: 'Create Account',
+                      size: 20.sp,
+                      color: Colors.white,
+                    ),
+                    const Spacer(),
+                  ],
+                ),
+                const Spacer(),
+              ],
+            ),
           ),
-        ),),
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -89,13 +110,77 @@ class _SignUpState extends State<SignUp> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    AppTextView(text: 'Country',size: 20.sp),
-                    SizedBox(height: .01.sh),
+                    AppTextView(text: 'Country', size: 15.sp),
 
-                    AppTextView(text: 'Nationality',size: 20.sp),
+                    Container(
+
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey),
+                          borderRadius: BorderRadius.circular(10)),
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: DropdownButton(
+                        isExpanded: true,
+                        // Initial Value
+                        value: dropdownvalue,
+                        underline: SizedBox(),
+
+                        // Down Arrow Icon
+                        icon: const Icon(Icons.keyboard_arrow_down),
+
+                        // Array list of items
+                        items: items.map((String items) {
+                          return DropdownMenuItem(
+                            value: items,
+                            child: Text(items),
+                          );
+                        }).toList(),
+                        // After selecting the desired option,it will
+                        // change button value to selected value
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            dropdownvalue = newValue!;
+                          });
+                        },
+                      ),
+                    ),
+
+                    SizedBox(height: .03.sh),
+
+                    AppTextView(text: 'Nationality', size: 15.sp),
+                    Container(
+
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey),
+                          borderRadius: BorderRadius.circular(10)),
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: DropdownButton(
+                        isExpanded: true,
+                        // Initial Value
+                        value: dropdownvalue,
+                        underline: SizedBox(),
+
+                        // Down Arrow Icon
+                        icon: const Icon(Icons.keyboard_arrow_down),
+
+                        // Array list of items
+                        items: items.map((String items) {
+                          return DropdownMenuItem(
+                            value: items,
+                            child: Text(items),
+                          );
+                        }).toList(),
+                        // After selecting the desired option,it will
+                        // change button value to selected value
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            dropdownvalue = newValue!;
+                          });
+                        },
+                      ),
+                    ),
                     SizedBox(height: .03.sh),
                     CustomTextInput(
-                      cornerRadius:5,
+                      cornerRadius: 5,
 
                       textEditController: _nameController,
                       inputType: InputType.Default,
@@ -113,7 +198,7 @@ class _SignUpState extends State<SignUp> {
                       textInputAction: TextInputAction.next,
                     ),
                     CustomTextInput(
-                      cornerRadius:5,
+                      cornerRadius: 5,
 
                       textEditController: _secondNameController,
                       inputType: InputType.Optional,
@@ -130,7 +215,7 @@ class _SignUpState extends State<SignUp> {
                       textInputAction: TextInputAction.next,
                     ),
                     CustomTextInput(
-                      cornerRadius:5,
+                      cornerRadius: 5,
 
                       textEditController: _thirdNameController,
                       inputType: InputType.Optional,
@@ -140,13 +225,13 @@ class _SignUpState extends State<SignUp> {
                       paddingH: context.width * .01,
                       topLabel: 'Third name',
                       bgWhite: true,
-                       showRequired: false,
+                      showRequired: false,
                       // hintTextString: 'username'
 
                       textInputAction: TextInputAction.next,
                     ),
                     CustomTextInput(
-                      cornerRadius:5,
+                      cornerRadius: 5,
 
                       textEditController: _lastNameController,
                       inputType: InputType.Default,
@@ -164,10 +249,10 @@ class _SignUpState extends State<SignUp> {
                       textInputAction: TextInputAction.next,
                     ),
                     CustomTextInput(
-                      cornerRadius:5,
+                      cornerRadius: 5,
 
                       textEditController: _nameArabicController,
-                      inputType: InputType.Default,
+                      inputType: InputType.arabic,
                       showPrefix: false,
 
                       showSuffix: false,
@@ -182,7 +267,7 @@ class _SignUpState extends State<SignUp> {
                       textInputAction: TextInputAction.next,
                     ),
                     CustomTextInput(
-                      cornerRadius:5,
+                      cornerRadius: 5,
 
                       textEditController: _secondNameArabicController,
                       inputType: InputType.Optional,
@@ -199,7 +284,7 @@ class _SignUpState extends State<SignUp> {
                       textInputAction: TextInputAction.next,
                     ),
                     CustomTextInput(
-                      cornerRadius:5,
+                      cornerRadius: 5,
 
                       textEditController: _thirdNameArabicController,
                       inputType: InputType.Optional,
@@ -216,10 +301,10 @@ class _SignUpState extends State<SignUp> {
                       textInputAction: TextInputAction.next,
                     ),
                     CustomTextInput(
-                      cornerRadius:5,
+                      cornerRadius: 5,
 
                       textEditController: _lastNameArabicController,
-                      inputType: InputType.Default,
+                      inputType: InputType.arabic,
                       showPrefix: false,
 
                       showSuffix: false,
@@ -235,10 +320,10 @@ class _SignUpState extends State<SignUp> {
                     ),
                     SizedBox(height: .01.sh),
 
-                    AppTextView(text: 'Gander',size: 20.sp),
+                    AppTextView(text: 'Gander', size: 20.sp),
                     SizedBox(height: .01.sh),
                     CustomTextInput(
-                      cornerRadius:5,
+                      cornerRadius: 5,
 
                       textEditController: _dateController,
                       inputType: InputType.Date,
@@ -249,13 +334,14 @@ class _SignUpState extends State<SignUp> {
                       topLabel: 'Date of Birth',
                       bgWhite: true,
                       showRequired: true,
-                      suffixIcon: Icon(Icons.calendar_month,color: context.theme.primaryColor),
+                      suffixIcon: Icon(Icons.calendar_month,
+                          color: context.theme.primaryColor),
                       // hintTextString: 'username'
 
                       textInputAction: TextInputAction.next,
                     ),
                     CustomTextInput(
-                      cornerRadius:5,
+                      cornerRadius: 5,
 
                       textEditController: _mobileController,
                       inputType: InputType.Phone,
@@ -272,7 +358,7 @@ class _SignUpState extends State<SignUp> {
                       textInputAction: TextInputAction.next,
                     ),
                     CustomTextInput(
-                      cornerRadius:5,
+                      cornerRadius: 5,
 
                       textEditController: _emailController,
                       inputType: InputType.Email,
@@ -289,7 +375,7 @@ class _SignUpState extends State<SignUp> {
                       textInputAction: TextInputAction.next,
                     ),
                     CustomTextInput(
-                      cornerRadius:5,
+                      cornerRadius: 5,
 
                       textEditController: _passwordController,
                       inputType: InputType.Password,
@@ -301,7 +387,10 @@ class _SignUpState extends State<SignUp> {
                         color: context.theme.colorScheme.acceptButton,
                       ),
                       suffixIcon: IconButton(
-                        icon: Icon(passVisible ? Icons.visibility_off : Icons.visibility,color: context.theme.colorScheme.kPrimaryColor,),
+                        icon: Icon(
+                          passVisible ? Icons.visibility_off : Icons.visibility,
+                          color: context.theme.colorScheme.kPrimaryColor,
+                        ),
                         onPressed: () {
                           setState(() => passVisible = !passVisible);
                         },
@@ -315,7 +404,7 @@ class _SignUpState extends State<SignUp> {
                       textInputAction: TextInputAction.done,
                     ),
                     CustomTextInput(
-                      cornerRadius:5,
+                      cornerRadius: 5,
 
                       textEditController: _confirmPasswordController,
                       inputType: InputType.Password,
@@ -327,9 +416,15 @@ class _SignUpState extends State<SignUp> {
                         color: context.theme.colorScheme.acceptButton,
                       ),
                       suffixIcon: IconButton(
-                        icon: Icon(passConfirmVisible ? Icons.visibility_off : Icons.visibility,color: context.theme.colorScheme.kPrimaryColor,),
+                        icon: Icon(
+                          passConfirmVisible
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                          color: context.theme.colorScheme.kPrimaryColor,
+                        ),
                         onPressed: () {
-                          setState(() => passConfirmVisible = !passConfirmVisible);
+                          setState(
+                              () => passConfirmVisible = !passConfirmVisible);
                         },
                       ),
                       isVisible: passConfirmVisible,
@@ -349,15 +444,17 @@ class _SignUpState extends State<SignUp> {
                         visualDensity: VisualDensity.compact,
                         activeColor: context.theme.primaryColor,
                         value: subscribe,
-
                         onChanged: (value) {
                           setState(() {
                             subscribe = value!;
                           });
                         },
-                        title: Text('Subscribe to flow up the reservation availability', style: context.textTheme.headline5!.copyWith(
-                          fontSize: 10.sp,
-                        ),),
+                        title: Text(
+                          'Subscribe to flow up the reservation availability',
+                          style: context.textTheme.headline5!.copyWith(
+                            fontSize: 10.sp,
+                          ),
+                        ),
                       ),
                     ),
                     SizedBox(
@@ -369,13 +466,12 @@ class _SignUpState extends State<SignUp> {
                         visualDensity: VisualDensity.compact,
                         activeColor: context.theme.primaryColor,
                         value: terms,
-
                         onChanged: (value) {
                           setState(() {
                             terms = value!;
                           });
                         },
-                        title:  RichText(
+                        title: RichText(
                           text: TextSpan(
                             text: 'I agree to the',
                             style: context.textTheme.headline5!.copyWith(
@@ -383,14 +479,13 @@ class _SignUpState extends State<SignUp> {
                             ),
                             children: <TextSpan>[
                               TextSpan(
-                                  text: ' Terms and condition',
-                                  style: context.textTheme.headlineMedium!.copyWith(
-                                      color: context.theme.primaryColor,
-                                      fontSize: 10.sp,
-                                      decoration: TextDecoration.underline
-                                  ),
+                                text: ' Terms and condition',
+                                style: context.textTheme.headlineMedium!
+                                    .copyWith(
+                                        color: context.theme.primaryColor,
+                                        fontSize: 10.sp,
+                                        decoration: TextDecoration.underline),
                                 // recognizer: TapGestureRecognizer()..onTap= ()=> context.navigator(UsingPolicy())
-
                               ),
                             ],
                           ),
@@ -406,15 +501,17 @@ class _SignUpState extends State<SignUp> {
                         visualDensity: VisualDensity.compact,
                         activeColor: context.theme.primaryColor,
                         value: knowledge,
-
                         onChanged: (value) {
                           setState(() {
                             knowledge = value!;
                           });
                         },
-                        title: Text('I acknowledge that my registration on the platform dose not mean that i will be accepted int Hija, and i know that reservation will be opened later', style: context.textTheme.headline5!.copyWith(
-                          fontSize: 10.sp,
-                        ),),
+                        title: Text(
+                          'I acknowledge that my registration on the platform dose not mean that i will be accepted int Hija, and i know that reservation will be opened later',
+                          style: context.textTheme.headline5!.copyWith(
+                            fontSize: 10.sp,
+                          ),
+                        ),
                       ),
                     ),
                     const SizedBox(
@@ -422,7 +519,6 @@ class _SignUpState extends State<SignUp> {
                     ),
                     Center(
                       child: WCustomButton(
-
                         radius: 6,
                         height: .06.sh,
                         width: .8.sw,
@@ -448,13 +544,11 @@ class _SignUpState extends State<SignUp> {
                                 style: context.textTheme.headline4!.copyWith(
                                     color: context.theme.primaryColor,
                                     fontSize: 10.sp,
-                                    decoration: TextDecoration.underline
-                                ),
+                                    decoration: TextDecoration.underline),
                                 recognizer: TapGestureRecognizer()
-                                  ..onTap=(){
-                                    context.navigator(LoginPage());
-                                  }
-                            ),
+                                  ..onTap = () {
+                                    context.navigator(const LoginPage());
+                                  }),
                           ],
                         ),
                       ),
@@ -462,20 +556,18 @@ class _SignUpState extends State<SignUp> {
                     const SizedBox(
                       height: 50,
                     ),
-
                   ],
                 ),
               ),
             )
-
           ],
         ),
       ),
     ));
   }
 
-  Future<void> signUp()async{
-  // _formKey.currentState!.validate();
-    context.navigator(UsingPolicy());
+  Future<void> signUp() async {
+    // _formKey.currentState!.validate();
+    context.navigator(CompleteProfile());
   }
 }

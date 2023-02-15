@@ -74,7 +74,7 @@ class _CompleteProfileState extends State<CompleteProfile> {
                     padding: const EdgeInsets.all(2.0),
                     child: IconButton(icon: const Icon(Icons.arrow_back_ios_outlined,color: Colors.white,)
                       ,onPressed: (){
-                        Navigator.canPop(context);
+                        Navigator.pop(context);
                       },),
                   ),
                   const Spacer(),
@@ -309,7 +309,8 @@ class _CompleteProfileState extends State<CompleteProfile> {
   }
 
   Future<void> signUp()async{
-    context.navigator(const SendEmail(title: 'Email verification',type: SendEmailTypes.forgetPassword,description: 'Please enter  your email address for verify',));
+    _formKey.currentState?.validate();
+    // context.navigator(const SendEmail(title: 'Email verification',type: SendEmailTypes.forgetPassword,description: 'Please enter  your email address for verify',));
 
   }
 }
