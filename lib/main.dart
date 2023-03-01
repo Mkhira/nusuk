@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nusuk/auth_view/login.dart';
+import 'package:nusuk/screens/home.dart';
 
 import 'config/theme.dart';
 
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
         theme: appThemes.light(
           MediaQueryData.fromWindow(WidgetsBinding.instance.window).size,
         ),
-        home: LoginPage(),
+        home: HomePageScreen(),
       );
     });
   }

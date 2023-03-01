@@ -27,8 +27,8 @@ import '../shared_widgets/custom_button.dart';
 import '../shared_widgets/custom_text_input.dart';
 
 class CompleteProfile extends StatefulWidget {
-  const CompleteProfile({Key? key}) : super(key: key);
-
+  const CompleteProfile({Key? key,required this.profileType}) : super(key: key);
+   final ProfileType profileType;
   @override
   State<CompleteProfile> createState() => _CompleteProfileState();
 }
@@ -78,7 +78,7 @@ class _CompleteProfileState extends State<CompleteProfile> {
                       },),
                   ),
                   const Spacer(),
-                  AppTextView(text: 'Complete Profile', size: 20.sp,color: Colors.white,),
+                  AppTextView(text: widget.profileType.value, size: 20.sp,color: Colors.white,),
                   const Spacer(),
 
                 ],
